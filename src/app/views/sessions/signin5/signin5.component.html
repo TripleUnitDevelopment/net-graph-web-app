@@ -1,0 +1,41 @@
+<div class="BlueBG">
+  <mat-progress-bar mode="determinate" class="session-progress"></mat-progress-bar>
+  <a href="#"><img src="./assets/images/logo-light.png" alt="Logo" class="LoginPosition" /></a>
+  <div class="flex-Div">
+    <form class="MainForm FormSmWidth" [formGroup]="signinForm" (ngSubmit)="signin()">
+      <h2>Login </h2>
+      <p class="font14"> Login here using your username and password. Required fields are marked * </p>
+      <div class="mb-3">
+        <mat-form-field class="full-width">
+          <input matInput name="username" [formControl]="signinForm.controls['username']" placeholder="Your User Name *"
+            value="" name="your-name">
+        </mat-form-field>
+        <small *ngIf="signinForm.controls['username'].hasError('required') && signinForm.controls['username'].touched"
+          class="form-error-msg"> Username is required </small>
+      </div>
+      <div class="mb-3">
+        <mat-form-field class="full-width">
+          <input type="password" name="your-password" matInput [formControl]="signinForm.controls['password']"
+            placeholder="Password" value="">
+        </mat-form-field>
+        <small *ngIf="signinForm.controls['password'].hasError('required') && signinForm.controls['password'].touched"
+          class="form-error-msg"> Password is required </small>
+      </div>
+      <div class="mb-3">
+        <div class="row">
+          <div class="col-md">
+            <mat-checkbox name="rememberMe" [formControl]="signinForm.controls['rememberMe']" class="!pb-4">Remember
+              Me</mat-checkbox>
+          </div>
+          <div class="col-md-auto">
+            <a [routerLink]="'/sessions/forgot-password'" class="WhiteLink">Forgot Password ?</a>
+          </div>
+        </div>
+      </div>
+      <p *ngIf="errorMsg" class="text-center"><small class="text-red">{{errorMsg}}</small></p>
+      <button mat-raised-button class="octfBtn octfBtnLight w-100" [disabled]="signinForm.invalid">Login</button>
+
+    </form>
+  </div>
+
+</div>
