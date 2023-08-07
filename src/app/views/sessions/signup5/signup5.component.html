@@ -52,7 +52,7 @@
         <small *ngIf="signupForm.hasError('mustMatch') && signupForm.controls['passwordConfirmation'].touched"
           class="form-error-msg"> Passwords do not match </small>
       </div>
-
+      <p *ngIf="errorMsg" class="text-center"><small class="text-red">{{errorMsg}}</small></p>
       <button mat-raised-button class="octfBtn octfBtnLight w-100" [disabled]="signupForm.invalid">Sign up</button>
     </form>
   </div>

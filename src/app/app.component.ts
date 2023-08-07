@@ -10,16 +10,16 @@ import { AuthConfig, OAuthErrorEvent, OAuthService } from 'angular-oauth2-oidc';
 import { config } from 'environments/config';
 
 
-// export const authConfig: AuthConfig = {
-//   issuer: 'https://login.microsoftonline.com/a8ad6ad6-67ce-4e12-809b-c675c9f07d56/v2.0',
-//   redirectUri: 'http://localhost:4200/sessions',  // Replace with your app's redirect URL
-//   clientId: config.clientId,  // Replace with your app's client ID
-//   responseType: 'code',
-//   scope: config.scope,  // Replace with your app's scopes
-//   showDebugInformation: true,  // Also enable to see output in the console.
-//   strictDiscoveryDocumentValidation: false,
-//   // tokenEndpoint: 'https://login.microsoftonline.com/a8ad6ad6-67ce-4e12-809b-c675c9f07d56/oauth2/v2.0/token'
-// };
+export const authConfig: AuthConfig = {
+  issuer: 'https://login.microsoftonline.com/a8ad6ad6-67ce-4e12-809b-c675c9f07d56/v2.0',
+  redirectUri: 'http://localhost:4200/sessions',  // Replace with your app's redirect URL
+  clientId: config.clientId,  // Replace with your app's client ID
+  responseType: 'code',
+  scope: config.scope,  // Replace with your app's scopes
+  showDebugInformation: true,  // Also enable to see output in the console.
+  strictDiscoveryDocumentValidation: false,
+  // tokenEndpoint: 'https://login.microsoftonline.com/a8ad6ad6-67ce-4e12-809b-c675c9f07d56/oauth2/v2.0/token'
+};
 
 
 @Component({

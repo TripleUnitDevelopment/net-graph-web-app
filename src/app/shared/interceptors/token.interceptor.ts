@@ -14,7 +14,7 @@ import { config } from "environments/config";
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private jwtAuth: JwtAuthService, private injector: Injector) { }
+  constructor(private jwtAuth: JwtAuthService, private injector: Injector, private authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Ignore interceptor for the authentication request
@@ -22,15 +22,15 @@ export class TokenInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    const token = localStorage.getItem('access_token');
+    const token = this.authService.getToken();
     console.log("[INTERCEPTOR]: access token ", token);
     if (token) {
-      const changedReq = req.clone({
+      req = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`
-        },
+          "x-user-token": `${this.authService.getToken()}`,
+          "Ocp-Apim-Subscription-Key": config.subscriptionKey // Add your subscription key here
+        }
       });
-      // return next.handle(changedReq);
     }
     return next.handle(req);
     //  else {

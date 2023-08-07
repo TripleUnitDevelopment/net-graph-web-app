@@ -3,6 +3,8 @@ import { MatButton as MatButton } from '@angular/material/button';
 import { MatProgressBar as MatProgressBar } from '@angular/material/progress-bar';
 import { Validators, UntypedFormGroup, UntypedFormControl, FormControl, FormGroup, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { UserService } from 'app/shared/services/http/user.service';
+import { AuthService } from 'app/shared/services/http/common/auth-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup5',
@@ -14,7 +16,9 @@ export class Signup5Component {
   @ViewChild(MatButton) submitButton: MatButton;
 
   signupForm: UntypedFormGroup
-  constructor(private userService: UserService) { }
+  errorMsg = '';
+  constructor(private userService: UserService, private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
     const password = new UntypedFormControl('', Validators.required);
@@ -62,11 +66,16 @@ export class Signup5Component {
       email: this.signupForm.value.email,
       password: this.signupForm.value.password
     };
-
+    console.log("signing up", model);
     this.userService.Signup(model).subscribe((res: any) => {
       console.log(res);
+      this.authService.setToken(res.userToken);
+      this.router.navigate(['/home']);
     }, error => {
       console.log(error);
+      this.submitButton.disabled = false;
+      this.progressBar.mode = 'determinate';
+      this.errorMsg = error.message;
     });
   }
 }

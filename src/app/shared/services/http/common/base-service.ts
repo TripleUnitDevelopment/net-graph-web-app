@@ -21,7 +21,9 @@ export class BaseService {
       params: params,
       withCredentials: false
     };
-    return this.http.get<any>(this.apiUrl + url, this.httpOptions);
+    const separator = url.includes('?') ? '&' : '?';
+
+    return this.http.get<any>(`${this.apiUrl}${url}${separator}subscription-key=${config.subscriptionKey}`, this.httpOptions);
   }
 
   protected post(url: string, data: any, params?: HttpParams, options: { reportProgress?: boolean } = {}): Observable<HttpEvent<any>> {
@@ -31,6 +33,6 @@ export class BaseService {
       withCredentials: false,
       ...options.reportProgress ? { reportProgress: true, observe: 'events' } : {},
     };
-    return this.http.post<any>(this.apiUrl + url, data, this.httpOptions);
+    return this.http.post<any>(`${this.apiUrl}${url}?subscription-key=${config.subscriptionKey}`, data, this.httpOptions);
   }
 }

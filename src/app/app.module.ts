@@ -22,6 +22,8 @@ import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { PricingComponent } from './views/pricing/pricing.component';
 import { AuthService } from './shared/services/http/common/auth-service';
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { PricingCalculatorComponent } from './views/pricing-calculator/pricing-calculator.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 // AoT requires an exported function for factories
@@ -35,6 +37,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     OAuthModule.forRoot(),
     LayoutModule,
@@ -48,7 +52,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
     RouterModule.forRoot(rootRouterConfig, { useHash: false })
   ],
-  declarations: [AppComponent, PricingComponent],
+  declarations: [AppComponent, PricingComponent, PricingCalculatorComponent],
   providers: [
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     // { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },

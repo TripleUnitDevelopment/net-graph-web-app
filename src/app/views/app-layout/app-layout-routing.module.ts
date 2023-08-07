@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from 'app/shared/components/layouts/app-layout/app-layout/app-layout.component';
 import { HomeComponent } from '../home/home.component';
 import { PricingComponent } from '../pricing/pricing.component';
+import { PricingCalculatorComponent } from '../pricing-calculator/pricing-calculator.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,11 @@ const routes: Routes = [
       path: 'pricing',
       component: PricingComponent,
       data: { title: 'Pricing', breadcrumb: 'PRICING' }
+    },
+    {
+      path: 'pricing-calculator', ///:plan //Disabled, replaced with query param obj
+      component: PricingCalculatorComponent,
+      data: { title: 'Package Calculator ', breadcrumb: 'PRICINGCALCULATOR' }
     },
   ]
   },

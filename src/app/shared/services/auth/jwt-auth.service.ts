@@ -123,6 +123,10 @@ export class JwtAuthService {
     return this.ls.getItem(this.APP_USER);
   }
 
+  setToken(token: string){
+    this.ls.setItem(this.JWT_TOKEN, token);
+  }
+
   setUserAndToken(token: String, user: User, isAuthenticated: Boolean) {
     this.isAuthenticated = isAuthenticated;
     this.token = token;

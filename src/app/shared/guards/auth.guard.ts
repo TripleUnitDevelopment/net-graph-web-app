@@ -6,14 +6,15 @@ import {
   Router,
 } from "@angular/router";
 import { JwtAuthService } from "../services/auth/jwt-auth.service";
+import { AuthService } from "../services/http/common/auth-service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, private jwtAuth: JwtAuthService) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.jwtAuth.isLoggedIn()) {
+    if (this.authService.isAuthenticated()) {
       return true;
     } else {
       this.router.navigate(["/sessions/signin"], {

@@ -7,6 +7,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AppLoaderService } from '../../../shared/services/app-loader/app-loader.service';
 import { JwtAuthService } from '../../../shared/services/auth/jwt-auth.service';
+import { UserService } from 'app/shared/services/http/user.service';
+import { AuthService } from 'app/shared/services/http/common/auth-service';
 
 @Component({
   selector: 'app-signin5',
@@ -24,19 +26,19 @@ export class Signin5Component {
   private _unsubscribeAll: Subject<any>;
 
   constructor(
-    private jwtAuth: JwtAuthService,
+    private authService: AuthService,
     private egretLoader: AppLoaderService,
     private router: Router,
-    private route: ActivatedRoute
+    private userService: UserService,
   ) {
     this._unsubscribeAll = new Subject();
   }
 
   ngOnInit() {
     this.signinForm = new UntypedFormGroup({
-      username: new UntypedFormControl('Watson', Validators.required),
-      password: new UntypedFormControl('12345678', Validators.required),
-      rememberMe: new UntypedFormControl(true)
+      username: new UntypedFormControl('', Validators.required),
+      password: new UntypedFormControl('', Validators.required),
+      rememberMe: new UntypedFormControl(false)
     });
 
     // this.route.queryParams
@@ -45,7 +47,7 @@ export class Signin5Component {
   }
 
   ngAfterViewInit() {
-    this.autoSignIn();
+    // this.autoSignIn();
   }
 
   ngOnDestroy() {
@@ -54,32 +56,41 @@ export class Signin5Component {
   }
 
   signin() {
-    const signinData = this.signinForm.value
+    const signinData = this.signinForm.value;
+    console.log(signinData);
 
     this.submitButton.disabled = true;
     this.progressBar.mode = 'indeterminate';
 
-    this.jwtAuth.signin(signinData.username, signinData.password)
-      .subscribe(response => {
-        this.router.navigateByUrl(this.jwtAuth.return);
-      }, err => {
-        this.submitButton.disabled = false;
-        this.progressBar.mode = 'determinate';
-        this.errorMsg = err.message;
-        // console.log(err);
-      })
+    const model = {
+      userEmail: this.signinForm.value.username,
+      password: this.signinForm.value.password
+    };
+
+    console.log(model);
+
+    this.userService.Signin(model).subscribe((res: any) => {
+      console.log(res);
+      this.authService.setToken(res.userToken);
+      this.router.navigate(['/home']);
+    }, error => {
+      console.log(error);
+      this.submitButton.disabled = false;
+      this.progressBar.mode = 'determinate';
+      this.errorMsg = error.error.message;
+    });
   }
 
-  autoSignIn() {
-    if (this.jwtAuth.return === '/') {
-      return
-    }
-    this.egretLoader.open(`Automatically Signing you in! \n Return url: ${this.jwtAuth.return.substring(0, 20)}...`, { width: '320px' });
-    setTimeout(() => {
-      this.signin();
-      console.log('autoSignIn');
-      this.egretLoader.close()
-    }, 2000);
-  }
+  // autoSignIn() {
+  //   if (this.jwtAuth.return === '/') {
+  //     return
+  //   }
+  //   this.egretLoader.open(`Automatically Signing you in! \n Return url: ${this.jwtAuth.return.substring(0, 20)}...`, { width: '320px' });
+  //   setTimeout(() => {
+  //     this.signin();
+  //     console.log('autoSignIn');
+  //     this.egretLoader.close()
+  //   }, 2000);
+  // }
 
 }

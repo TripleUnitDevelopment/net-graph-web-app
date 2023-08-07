@@ -1,0 +1,93 @@
+<div class="PageContent">
+    <div class="MrTop88">
+        <section class="">
+            <div class="  pt50 pb-5">
+                <div class="container">
+                    <div class="row   align-items-center">
+                        <div class="col-md">
+                            <div class="elementorHead">
+                                <span class="mainSpan">// SELECTED PACKAGE</span>
+                                <h2 class="mainHeading">{{selectedPlan.packageTitle}} </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" pt30 ">
+                        <div class="row">
+                            <div class="col-md">
+                                <div class="WhiteCard">
+                                    <div>
+                                        <h5 class="mb-2">How many users would you like to start with?</h5>
+                                        <p class="NoteGray ">You can increase this number at any time.</p>
+                                    </div>
+                                    <div>
+                                        <div class="row align-items-center mb-4">
+                                            <div class="col-md-2">
+                                                <label>Users : </label>
+                                            </div>
+                                            <div class="col-md ">
+                                                <input type="number" class="form-control InputStyle width34" />
+                                            </div>
+                                        </div>
+                                        <div class="row  ">
+                                            <div class="col-md-2">
+                                                <label>Pay : </label>
+                                            </div>
+                                            <div class="col-md ">
+                                                <label class="RBcontainer">Monthly
+                                                    <input type="radio" name="radioName" checked="checked">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="RBcontainer">Annually <span class="NoteSpan"
+                                                        *ngIf="selectedPlan.annualDiscount && selectedPlan.annualDiscount > 0">(
+                                                        Pay
+                                                        annually and receive {{selectedPlan.annualDiscount}}% discount
+                                                        )</span>
+                                                    <input type="radio" name="radioName">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row mt-3 align-items-end ">
+                                            <div class="col-md ">
+                                                <label>Payment </label>
+                                                <h3 class="mb-0"> {{selectedPlan.cost}} {{selectedPlan.currency}} </h3>
+                                            </div>
+                                            <div class="col-md-auto ">
+                                                <button class="btn LightBlueBtn BtnPadding2" type="submit"> Select
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="otPricingTable SelectedPlan">
+                                    <div class="otPricingHeader">
+                                        <h4 class="title-table">Features</h4>
+                                    </div>
+
+                                    <div class="inner-table">
+                                        <div class="details ">
+                                            <ul>
+                                                <li class="active">{{selectedPlan.packageFull}}</li>
+                                                <!-- <li class="active">24/7 System Monitoring</li>
+                                        <li class="active">Machine and Deep Learning</li>
+                                        <li class="active">Data Quality Management</li>
+                                        <li class="active">Security Management</li> -->
+                                            </ul>
+                                        </div>
+                                        <!-- <a href="#" class="octf-Btn">Choose Plan</a> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+
+</div>

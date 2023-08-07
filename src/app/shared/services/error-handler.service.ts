@@ -10,6 +10,7 @@ export class ErrorHandlerService extends ErrorHandler {
     }
     // https://github.com/angular/angular/issues/17010
     handleError(error: any) {
+        console.log("Handling error: ", error);
         let increment = 5;
         let max = 50;
 

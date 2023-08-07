@@ -120,7 +120,7 @@
           </ul>
 
           <form class="d-flex">
-
+                    
             <div class="HeaderInfo">
               <i class='bx bxs-phone'></i>
               <div>
@@ -128,9 +128,10 @@
                 <span>+1-800-456-478-23</span>
               </div>
             </div>
-            <button class="btn LightBlueBtn mr-2" type="submit"routerLink="/sessions/login"> Login </button>
-            <button class="btn LightBlueBtn LightBlueBorderBtn" routerLink="/sessions/signup"> Sign Up </button>
-                    </form>
+            <button class="btn LightBlueBtn mr-2" routerLink="/sessions/signin" *ngIf="!isLoggedin"> Login </button>
+            <button class="btn LightBlueBtn LightBlueBorderBtn" routerLink="/sessions/signup" *ngIf="!isLoggedin"> Sign Up </button>
+            <button class="btn LightBlueBtn LightBlueBorderBtn" *ngIf="isLoggedin" (click)="Signout()"> Sign out </button>
+          </form>
         </div>
       </div>
     </nav>

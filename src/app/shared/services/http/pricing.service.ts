@@ -8,17 +8,21 @@ import { BaseService } from './common/base-service';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService extends BaseService {
+export class PackagesService extends BaseService {
 
   constructor(private httpClient: HttpClient) {
     super(httpClient);
   }
 
-  Signin(model: any): Observable<any> {
-    return this.post(API_CONSTANTS.Auth.Signin, model);
+  GetAvailablePackages(currency: any, language: any): Observable<any> {
+    return this.get(`${API_CONSTANTS.packages.getAvailablePackages}?currency=${currency}&language=${language}`);
   }
 
-  Signup(model: any): Observable<any> {
+  ValidateOfferCode(code: any): Observable<any> {
+    return this.get(`${API_CONSTANTS.packages.validateOfferCode}${code}`);
+  }
+
+  GetCalculatedCost(model: any): Observable<any> {
     return this.post(API_CONSTANTS.Auth.Signup, model);
   }
 

@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, Renderer2, ViewChild } from '@angular/core';
+import { AuthService } from 'app/shared/services/http/common/auth-service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,10 @@ export class HeaderComponent {
 
   @ViewChild('NavBar', { static: true }) navBar: ElementRef;
 
-  constructor(private renderer: Renderer2) { }
+  isLoggedin: boolean = false;
+  constructor(private renderer: Renderer2, private authService: AuthService) { 
+    this.isLoggedin = this.authService.isAuthenticated();
+  }
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
@@ -18,6 +22,12 @@ export class HeaderComponent {
     } else {
       this.renderer.removeClass(this.navBar.nativeElement, 'Fixedtop');
     }
+  }
+
+
+  Signout(){
+    this.authService.removeToken();
+    this.isLoggedin = false;
   }
 
 }
