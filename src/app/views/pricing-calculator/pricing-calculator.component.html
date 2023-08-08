@@ -45,12 +45,11 @@
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 <!-- *ngIf="selectedPlan.annualDiscount && selectedPlan.annualDiscount > 0" -->
-                                                <label class="RBcontainer">Annually <span class="NoteSpan"
-                                                        *ngIf="cost?.annualDiscountAmount > 0">(
+                                                <label class="RBcontainer">Annually <span class="NoteSpan">(
                                                         Pay
-                                                        annually and receive {{cost?.annualDiscountAmount}}% discount
+                                                        annually and receive {{selectedPlan?.annualDiscount}}% discount
                                                         )</span>
-                                                    <input type="radio" formControlName="billingPeriod" value="Y"
+                                                    <input type="radio" formControlName="billingPeriod" value="A"
                                                         name="billingPeriod">
                                                     <span class="checkmark"></span>
                                                 </label>
@@ -78,18 +77,24 @@
                                                 <div class="row">
                                                     <div class="col-md" *ngIf="cost?.baseCostAmount > 0">
                                                         <label>Base amount </label>
-                                                        <h3 class="mb-0"> {{cost?.baseCostAmount}} {{cost?.currency}}
+                                                        <h3 class="mb-0"> {{cost?.baseCostAmount}} {{selectedCurrency}}
                                                         </h3>
                                                     </div>
                                                     <div class="col-md" *ngIf="cost?.offerDiscountAmount > 0">
                                                         <label>Discount amount </label>
                                                         <h3 class="mb-0"> {{cost?.offerDiscountAmount}}
-                                                            {{cost?.currency}}
+                                                            {{selectedCurrency}}
+                                                        </h3>
+                                                    </div>
+                                                    <div class="col-md" *ngIf="cost?.annualDiscountAmount > 0">
+                                                        <label>Annual Discount amount </label>
+                                                        <h3 class="mb-0"> {{cost?.annualDiscountAmount}}
+                                                            {{selectedCurrency}}
                                                         </h3>
                                                     </div>
                                                     <div class="col-md">
                                                         <label>Total Payment </label>
-                                                        <h3 class="mb-0"> {{cost?.finalCostAmount}} {{cost?.currency}}
+                                                        <h3 class="mb-0"> {{cost?.finalCostAmount}} {{selectedCurrency}}
                                                         </h3>
                                                     </div>
                                                 </div>

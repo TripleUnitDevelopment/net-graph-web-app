@@ -18,6 +18,7 @@ export class PricingComponent implements OnInit {
 
   selectedLanguageID;
   selectedCurrencyID: number | null = null;
+  selectedCurrency!: any 
 
   packages: any[] = [];
   languages: any[] = [];
@@ -30,33 +31,7 @@ export class PricingComponent implements OnInit {
   ngOnInit(): void {
     this.getAvailableCurrencies()
 
-    //Fork join disabled
-    // forkJoin([
-    //   this.getAvailableLanguages(),
-    //   this.getAvailableCurrencies()
-    // ]).subscribe(
-    //   ([languages, currencies]) => {
-    //     console.log("Available languages: ", languages);
-    //     console.log("Available currencies: ", currencies);
-    //     // //Fetch packages once fork is complete
-    //     // this.getAvailablePackages();
-    //   },
-    //   error => {
-    //     console.log(error)
-    //     this.isLoading = false;
-    //   }
-    // );
   }
-
-  //Fetch available languages //Disabled
-  // getAvailableLanguages() {
-  //   return this.languageService.GetAvailableLanguages().pipe(
-  //     map((res: any) => {
-  //       this.languages = res;
-  //       return res;  // Ensure the Observable emits the response
-  //     })
-  //   );
-  // }
 
   //Fetch available currencies
   getAvailableCurrencies() {
@@ -65,32 +40,23 @@ export class PricingComponent implements OnInit {
       this.currencies = res;
       console.log("currencies: ", this.currencies)
       this.selectedCurrencyID = this.currencies[0].id;
+      this.selectedCurrency = this.currencies[0];
       this.getAvailablePackages();
     }, error => {
       console.log(error);
       this.isLoading = false;
     });
-    //Fork join disabled
-    // return this.currencyService.GetAvailableCurrencies().pipe(
-    //   map((res: any) => {
-    //     this.currencies = res;
-    //     return res;  //Enable for fork join
-    //   })
-    // );
+
   }
 
   //Fetch available packages (based on language / currency)
   //Automatically gets called on language/currency change
   getAvailablePackages() {
-    const selectedCurrency = this.currencies.find(t => t.id == this.selectedCurrencyID);
+    this.selectedCurrency = this.currencies.find(t => t.id == this.selectedCurrencyID);
     // const selectedLanguage = this.languages.find(t => t.id == this.selectedLanguageID);
-    console.log("Selected currency object: ", selectedCurrency);
+    console.log("Selected currency object: ",  this.selectedCurrency);
 
-    //Language disabled
-    // if (selectedLanguage.symbol == "en") {
-    //   selectedLanguage.symbol = "ENG"
-    // }
-    this.packagesService.GetAvailablePackages(selectedCurrency.threeDigitCode, "en").subscribe((res: any) => {
+    this.packagesService.GetAvailablePackages( this.selectedCurrency.threeDigitCode, "en").subscribe((res: any) => {
       console.log("available packages: ", res);
       this.packages = res;
       this.isLoading = false;
@@ -110,30 +76,19 @@ export class PricingComponent implements OnInit {
     }
 
     this.selectedCurrencyID = event.target.value;
+    this.selectedCurrencyID = event.target.value;
     console.log("currency changed", this.selectedCurrencyID);
     this.getAvailablePackages();
 
   }
 
-  //disabled
-  // onLanguageChange() {
-  //   console.log("language changed", this.selectedLanguageID)
-
-  //   if (this.selectedCurrencyID && this.selectedLanguageID) {
-  //     this.getAvailablePackages();
-  //   }
-  // }
 
   choosePlan(plan) {
     console.log("chosen plan: ", plan);
     if (this.authService.isAuthenticated()) {
       const selectedCurrency = this.currencies.find(t => t.id == this.selectedCurrencyID);
       this.router.navigate(['/pricing-calculator/' + plan.id + '/' + selectedCurrency.symbol]);
-      // const params: NavigationExtras = {
-      //   queryParams: { data: JSON.stringify(plan) }
-      // }
-
-      // this.router.navigate(['/pricing-calculator'], params);
+  
     }
     else {
       this.router.navigate(['/sessions/signin']);

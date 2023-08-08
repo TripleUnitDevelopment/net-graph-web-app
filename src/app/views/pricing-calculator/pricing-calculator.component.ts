@@ -25,7 +25,7 @@ export class PricingCalculatorComponent implements OnInit {
   @ViewChild(MatProgressBar) progressBar: MatProgressBar;
   constructor(private route: ActivatedRoute, private router: Router, private packagesService: PackagesService) {
     this.packageForm = new UntypedFormGroup({
-      userCount: new UntypedFormControl(null, [
+      userCount: new UntypedFormControl(1, [
         Validators.required,
         Validators.min(1),
         Validators.max(100)
@@ -80,6 +80,11 @@ export class PricingCalculatorComponent implements OnInit {
     this.packagesService.GetPackageByID(id).subscribe((res: any) => {
       this.isLoading = false;
       this.selectedPlan = res;
+      this.cost={
+        finalCostAmount:this.selectedPlan.cost,
+        baseCostAmount:this.selectedPlan.cost,
+      }
+      // this.calculateCost() 
       console.log("package: ", this.selectedPlan)
       // this.calculateCost();
     }, error => {
@@ -94,7 +99,6 @@ export class PricingCalculatorComponent implements OnInit {
     const model = {
       packageGUID: this.selectedPlan.id,
       offerGUID: this.offerCodeID,
-      // offerGUID: "218e9230-fdd9-ed11-9f74-002248433b63",
       userCount: this.packageForm.value.userCount,
       billingPeriod: this.packageForm.value.billingPeriod
     }

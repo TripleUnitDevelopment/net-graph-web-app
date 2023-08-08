@@ -74,12 +74,12 @@ export class Signup5Component {
       this.authService.setToken(res.userToken);
       this.isLoading = false;
       this.router.navigate(['/home']);
-    }, error => {
+    }, (error) => {
       console.log(error);
       this.isLoading = false;
       this.submitButton.disabled = false;
       // this.progressBar.mode = 'determinate';
-      this.errorMsg = error.message;
+      this.errorMsg = error.error.error.message;
     });
   }
 }
