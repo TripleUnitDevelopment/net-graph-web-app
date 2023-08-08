@@ -60,35 +60,35 @@ position: relative;
     font-weight: 400;
 }
 .octfBtn {
-    transition: all 0.3s linear;
-    -webkit-transition: all 0.3s linear;
-    -moz-transition: all 0.3s linear;
-    -o-transition: all 0.3s linear;
-    -ms-transition: all 0.3s linear;
-    font-size: 14px;
-    padding: 14px 30px 14px 30px;
-    line-height: 1.42857143;
-    display: inline-block;
-    margin-bottom: 0;
-    text-decoration: none;
-    text-transform: uppercase;
-    white-space: nowrap;
-    vertical-align: middle;
-    font-weight: 800;
-    text-align: center;
-    background: #43baff;
-    cursor: pointer;
-    border: 1px solid transparent;
-    color: #fff;
-    outline: none;
+    transition: all 0.3s linear !important;
+    -webkit-transition: all 0.3s linear !important;
+    -moz-transition: all 0.3s linear !important;
+    -o-transition: all 0.3s linear !important;
+    -ms-transition: all 0.3s linear !important;
+    font-size: 14px !important;
+    padding: 14px 30px 14px 30px !important;
+    line-height: 1.42857143 !important;
+    display: inline-block !important;
+    margin-bottom: 0 !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    background: #43baff !important;
+    cursor: pointer !important;
+    border: 1px solid transparent !important;
+    color: #fff !important;
+    outline: none !important;
 } 
 .octfBtn.octfBtnLight {
-    background: #fff;
-    color: #1b1d21;
+    background: #fff !important;
+    color: #1b1d21 !important;
 } 
 .octfBtn.octfBtnLight:hover {
-    color: #fff;
-    background: #7141b1;
+    color: #fff !important;
+    background: #7141b1 !important;
 }
 .flex-Div{
     display: flex;
@@ -789,6 +789,7 @@ footer{
 }
 .GrayBg{
   background-color: #F8F8F8;
+  min-height: 100vh;
 }
 .pt80{
   padding-top: 80px;
@@ -1334,3 +1335,78 @@ footer{
 .WhiteCard hr { 
   opacity: .05;
 }
+.mat-mdc-raised-button {
+  height: inherit !important; 
+}
+.small, small { 
+  display: block;
+}
+.mat-mdc-form-field { 
+  width: 100% !important;
+}
+input:-internal-autofill-selected { 
+  background-color: transparent !important;
+}
+.mat-mdc-form-field-subscript-wrapper { 
+  height: 5px !important;
+}
+/*Change text in autofill textbox*/
+input:-webkit-autofill{
+  -webkit-text-fill-color: #fff !important;
+}
+
+input:-webkit-autofill { 
+  -webkit-background-clip: text;
+}
+/* .mat-input-element { 
+  background: transparent; 
+} */
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+      background-color: transparent;
+  }
+   .mat-form-field-infix { 
+      background-color: transparent;
+  }
+   .mat-form-field-infix { 
+      background-color: transparent;
+  }
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+      background-color: transparent;
+  }
+  small.form-error-msg {
+    display: block;
+    color: red;
+    font-size: .75rem;
+}
+.mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input, .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+  height: auto;
+  width: 100%;
+  /* background: rgba(255, 255, 255, 0.3); */
+  color: #fff;
+  border: none;
+  padding: 10px 10px;
+  box-sizing: border-box;
+  outline: none;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.875;
+  font-weight: 400;
+}
+.mdc-text-field { 
+  padding: 0 0px !important; 
+}
+.mdc-button {
+  font-weight: 700 !important;  
+}
+.WhiteCard h3 {
+  font-size: 1.4rem;
+}
+.btn[_ngcontent-ng-c3844676127]:disabled {
+  background-color: #eeeeee !important;
+  border: 1px solid #eeeeee !important;
+  color: #6C6C6C !important;
+}
+
+
+
+

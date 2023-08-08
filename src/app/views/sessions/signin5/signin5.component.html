@@ -4,7 +4,7 @@
   <div class="flex-Div">
     <form class="MainForm FormSmWidth" [formGroup]="signinForm" (ngSubmit)="signin()">
       <h2>Login </h2>
-      <p class="font14"> Login here using your username and password. Required fields are marked * </p>
+      <p class="font14 mb-3"> Login here using your username and password. Required fields are marked * </p>
       <div class="mb-3">
         <mat-form-field class="full-width">
           <input matInput name="username" [formControl]="signinForm.controls['username']" placeholder="Your User Name *"
