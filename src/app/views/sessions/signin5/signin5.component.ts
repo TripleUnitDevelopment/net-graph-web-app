@@ -23,6 +23,7 @@ export class Signin5Component {
   errorMsg = '';
   // return: string;
 
+  isLoading: boolean = false;
   private _unsubscribeAll: Subject<any>;
 
   constructor(
@@ -56,11 +57,12 @@ export class Signin5Component {
   }
 
   signin() {
+    this.isLoading = true;
     const signinData = this.signinForm.value;
     console.log(signinData);
 
     this.submitButton.disabled = true;
-    this.progressBar.mode = 'indeterminate';
+    // this.progressBar.mode = 'indeterminate';
 
     const model = {
       userEmail: this.signinForm.value.username,
@@ -71,13 +73,18 @@ export class Signin5Component {
 
     this.userService.Signin(model).subscribe((res: any) => {
       console.log(res);
+      this.isLoading = false;
       this.authService.setToken(res.userToken);
       this.router.navigate(['/home']);
     }, error => {
+      this.isLoading = false;
       console.log(error);
       this.submitButton.disabled = false;
-      this.progressBar.mode = 'determinate';
-      this.errorMsg = error.error.message;
+      // this.progressBar.mode = 'determinate';
+      this.errorMsg = error.error.error.message;
+      setTimeout(() => {
+        this.errorMsg = null;
+      }, 4000);
     });
   }
 

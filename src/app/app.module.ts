@@ -24,6 +24,7 @@ import { AuthService } from './shared/services/http/common/auth-service';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { PricingCalculatorComponent } from './views/pricing-calculator/pricing-calculator.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedMaterialModule } from './shared/shared-material.module';
 
 
 // AoT requires an exported function for factories
@@ -42,6 +43,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HttpClientModule,
     OAuthModule.forRoot(),
     LayoutModule,
+    SharedMaterialModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -18,12 +18,16 @@ export class PackagesService extends BaseService {
     return this.get(`${API_CONSTANTS.packages.getAvailablePackages}?currency=${currency}&language=${language}`);
   }
 
+  GetPackageByID(ID: string): Observable<any> {
+    return this.get(`${API_CONSTANTS.packages.getPackageByID}${ID}`);
+  }
+
   ValidateOfferCode(code: any): Observable<any> {
     return this.get(`${API_CONSTANTS.packages.validateOfferCode}${code}`);
   }
 
   GetCalculatedCost(model: any): Observable<any> {
-    return this.post(API_CONSTANTS.Auth.Signup, model);
+    return this.post(API_CONSTANTS.packages.calculateCost, model);
   }
 
 }

@@ -20,7 +20,7 @@ const routes: Routes = [
       data: { title: 'Pricing', breadcrumb: 'PRICING' }
     },
     {
-      path: 'pricing-calculator', ///:plan //Disabled, replaced with query param obj
+      path: 'pricing-calculator/:plan/:currency', ///:plan //Disabled, replaced with query param obj
       component: PricingCalculatorComponent,
       data: { title: 'Package Calculator ', breadcrumb: 'PRICINGCALCULATOR' }
     },

@@ -1,3 +1,4 @@
+<mat-progress-bar mode="indeterminate" class="session-progress" *ngIf="isLoading"></mat-progress-bar>
 <div class="PageContent">
     <div class="MrTop88">
         <section class="">
@@ -10,18 +11,22 @@
                                 <h2 class="mainHeading">Flexible Pricing Plans</h2>
                             </div>
                         </div>
-                        <div class="col-md-3">
+
+                        <!-- Language selection -->
+                        <!-- <div class="col-md-3">
                             <select class="form-control select2" [(ngModel)]="selectedLanguageID"
                                 (change)="onLanguageChange()">
                                 <option>Select Language</option>
                                 <option *ngFor="let language of languages" [value]="language.id">
                                     {{language.name}}</option>
                             </select>
-                        </div>
+                        </div> -->
+
+                        <!-- Currency selection -->
                         <div class="col-md-3">
-                            <select class="form-control select2" [(ngModel)]="selectedCurrencyID"
-                                (change)="onCurrencyChange()">
-                                <option>Select Currency</option>
+                            <select class="form-control select2" [ngModel]="selectedCurrencyID"
+                                (change)="onCurrencyChange($event)">
+                                <option [value]="null">Select Currency</option>
                                 <option *ngFor="let currency of currencies" [value]="currency.id">{{currency.symbol}} -
                                     {{currency.threeDigitCode}}</option>
                             </select>
@@ -55,7 +60,7 @@
                         </div>
 
                         <div class="row" *ngIf="packages?.length == 0 && isLoading">
-                            Select language and currency to view available plans
+                            Select currency to view available plans
                         </div>
                     </div>
                 </div>

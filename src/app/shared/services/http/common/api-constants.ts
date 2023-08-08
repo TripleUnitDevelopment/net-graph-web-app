@@ -8,6 +8,7 @@ export const API_CONSTANTS = {
   packages: {
     getAvailablePackages: 'packages',
     validateOfferCode: 'offers/',
+    getPackageByID: 'packages/',
     calculateCost: 'cost',
   },
 

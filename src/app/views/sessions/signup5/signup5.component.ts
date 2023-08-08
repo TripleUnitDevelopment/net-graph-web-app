@@ -17,6 +17,7 @@ export class Signup5Component {
 
   signupForm: UntypedFormGroup
   errorMsg = '';
+  isLoading: boolean = false;
   constructor(private userService: UserService, private authService: AuthService,
     private router: Router) { }
 
@@ -58,7 +59,8 @@ export class Signup5Component {
     console.log(signupData);
 
     this.submitButton.disabled = true;
-    this.progressBar.mode = 'indeterminate';
+    // this.progressBar.mode = 'indeterminate';
+    this.isLoading = true;
 
     const model = {
       firstName: this.signupForm.value.firstName,
@@ -70,11 +72,13 @@ export class Signup5Component {
     this.userService.Signup(model).subscribe((res: any) => {
       console.log(res);
       this.authService.setToken(res.userToken);
+      this.isLoading = false;
       this.router.navigate(['/home']);
     }, error => {
       console.log(error);
+      this.isLoading = false;
       this.submitButton.disabled = false;
-      this.progressBar.mode = 'determinate';
+      // this.progressBar.mode = 'determinate';
       this.errorMsg = error.message;
     });
   }

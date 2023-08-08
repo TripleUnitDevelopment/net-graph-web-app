@@ -36,7 +36,8 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/styles/landing-styles/select/select2.min.css",
               "src/assets/styles/landing-styles/MainStyle.css",
-              "./node_modules/boxicons/css/boxicons.min.css"
+              "./node_modules/boxicons/css/boxicons.min.css",
+              "src/styles.scss"
             ],
             "scripts": [
               "src/assets/scripts/JQuery-3.3.1.min.js",

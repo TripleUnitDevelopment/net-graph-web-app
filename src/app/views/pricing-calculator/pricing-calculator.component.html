@@ -1,8 +1,9 @@
+<mat-progress-bar mode="indeterminate" class="session-progress" *ngIf="isLoading || isCalculating"></mat-progress-bar>
 <div class="PageContent">
     <div class="MrTop88">
         <section class="">
             <div class="  pt50 pb-5">
-                <div class="container">
+                <div class="container" *ngIf="selectedPlan">
                     <div class="row   align-items-center">
                         <div class="col-md">
                             <div class="elementorHead">
@@ -19,13 +20,18 @@
                                         <h5 class="mb-2">How many users would you like to start with?</h5>
                                         <p class="NoteGray ">You can increase this number at any time.</p>
                                     </div>
-                                    <div>
+                                    <div [formGroup]="packageForm">
                                         <div class="row align-items-center mb-4">
                                             <div class="col-md-2">
                                                 <label>Users : </label>
                                             </div>
                                             <div class="col-md ">
-                                                <input type="number" class="form-control InputStyle width34" />
+                                                <input type="number" class="form-control InputStyle width34"
+                                                    formControlName="userCount" min="1" max="100" />
+                                                <div *ngIf="packageForm.controls.userCount.errors?.min">Minimum value is
+                                                    1.</div>
+                                                <div *ngIf="packageForm.controls.userCount.errors?.max">Maximum value is
+                                                    100.</div>
                                             </div>
                                         </div>
                                         <div class="row  ">
@@ -34,27 +40,63 @@
                                             </div>
                                             <div class="col-md ">
                                                 <label class="RBcontainer">Monthly
-                                                    <input type="radio" name="radioName" checked="checked">
+                                                    <input type="radio" formControlName="billingPeriod" value="M"
+                                                        name="billingPeriod">
                                                     <span class="checkmark"></span>
                                                 </label>
+                                                <!-- *ngIf="selectedPlan.annualDiscount && selectedPlan.annualDiscount > 0" -->
                                                 <label class="RBcontainer">Annually <span class="NoteSpan"
-                                                        *ngIf="selectedPlan.annualDiscount && selectedPlan.annualDiscount > 0">(
+                                                        *ngIf="cost?.annualDiscountAmount > 0">(
                                                         Pay
-                                                        annually and receive {{selectedPlan.annualDiscount}}% discount
+                                                        annually and receive {{cost?.annualDiscountAmount}}% discount
                                                         )</span>
-                                                    <input type="radio" name="radioName">
+                                                    <input type="radio" formControlName="billingPeriod" value="Y"
+                                                        name="billingPeriod">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </div>
                                         </div>
+                                        <div class="row align-items-center mb-4">
+                                            <div class="col-md-2">
+                                                <label>Offer Code : </label>
+                                            </div>
+                                            <div class="col-md d-flex">
+                                                <input type="text" class="form-control InputStyle width34"
+                                                    [(ngModel)]="offerCode" [ngModelOptions]="{standalone: true}" />
+                                                <button class="btn LightBlueBtn LightBlueBorderBtn mr-2"
+                                                    (click)="ValidateOfferCode()" [disabled]="!offerCode"> Validate
+                                                </button>
+                                            </div>
+                                            <p *ngIf="offerCodeError" class="text-start"><small
+                                                    class="text-danger">{{offerCodeError}}</small></p>
+                                            <p *ngIf="offerCodeSuccess" class="text-start"><small
+                                                    class="text-success">Offer code applied !</small></p>
+                                        </div>
                                         <hr />
                                         <div class="row mt-3 align-items-end ">
                                             <div class="col-md ">
-                                                <label>Payment </label>
-                                                <h3 class="mb-0"> {{selectedPlan.cost}} {{selectedPlan.currency}} </h3>
+                                                <div class="row">
+                                                    <div class="col-md" *ngIf="cost?.baseCostAmount > 0">
+                                                        <label>Base amount </label>
+                                                        <h3 class="mb-0"> {{cost?.baseCostAmount}} {{cost?.currency}}
+                                                        </h3>
+                                                    </div>
+                                                    <div class="col-md" *ngIf="cost?.offerDiscountAmount > 0">
+                                                        <label>Discount amount </label>
+                                                        <h3 class="mb-0"> {{cost?.offerDiscountAmount}}
+                                                            {{cost?.currency}}
+                                                        </h3>
+                                                    </div>
+                                                    <div class="col-md">
+                                                        <label>Total Payment </label>
+                                                        <h3 class="mb-0"> {{cost?.finalCostAmount}} {{cost?.currency}}
+                                                        </h3>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-md-auto ">
-                                                <button class="btn LightBlueBtn BtnPadding2" type="submit"> Select
+                                                <button class="btn LightBlueBtn BtnPadding2" type="submit"
+                                                    [disabled]="!packageForm.valid || isCalculating"> Select
                                                 </button>
                                             </div>
                                         </div>

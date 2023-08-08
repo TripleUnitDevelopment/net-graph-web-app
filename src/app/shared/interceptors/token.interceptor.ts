@@ -23,12 +23,12 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     const token = this.authService.getToken();
-    console.log("[INTERCEPTOR]: access token ", token);
+    // console.log("[INTERCEPTOR]: access token ", token);
     if (token) {
       req = req.clone({
         setHeaders: {
           "x-user-token": `${this.authService.getToken()}`,
-          "Ocp-Apim-Subscription-Key": config.subscriptionKey // Add your subscription key here
+          "Ocp-Apim-Subscription-Key": config.subscriptionKey
         }
       });
     }
