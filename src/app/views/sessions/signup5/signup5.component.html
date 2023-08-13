@@ -55,6 +55,9 @@
       <p *ngIf="errorMsg" class="text-start"><small class="text-danger">{{errorMsg}}</small></p>
 
       <button mat-raised-button class="octfBtn octfBtnLight w-100" [disabled]="signupForm.invalid">Sign up</button>
+      <div class="text-center mt-3">
+        <span>Already have an account ? </span><a href="/sessions/signin" class="BlueLink">Login</a>
+      </div>
     </form>
   </div>
 

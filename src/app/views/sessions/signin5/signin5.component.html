@@ -34,7 +34,9 @@
       </div>
       <p *ngIf="errorMsg" class="text-start"><small class="text-danger">{{errorMsg}}</small></p>
       <button mat-raised-button class="octfBtn octfBtnLight w-100" [disabled]="signinForm.invalid">Login</button>
-
+      <div class="text-center mt-3">
+        <span>Don't have an account ? </span><a href="/sessions/signup" class="BlueLink">Sign up</a>
+      </div>
     </form>
   </div>
 
