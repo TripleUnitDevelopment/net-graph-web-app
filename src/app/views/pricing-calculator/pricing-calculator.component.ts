@@ -40,7 +40,6 @@ export class PricingCalculatorComponent implements OnInit {
   ngOnInit(): void {
     const selectedPlanID = this.route.snapshot.paramMap.get('plan'); //Disabled
     this.selectedCurrency = this.route.snapshot.paramMap.get('currency'); //Disabled
-    // const planID = JSON.parse(this.route.snapshot.queryParamMap.get('data'));
 
     console.log("selected plan ID: ", selectedPlanID);
 
