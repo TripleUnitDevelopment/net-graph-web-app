@@ -5,25 +5,25 @@
   <div class="flex-Div">
     <form class="MainForm FormSmWidth mt-4 mb-4" [formGroup]="signupForm" (ngSubmit)="signup()">
       <h2>Sign Up </h2>
-      <p class="font14 mb-3">Enter the data to register. Required fields are marked * </p>
-      <div class="mb-1">
-        <mat-form-field class=" ">
+      <p class="font14">Enter the data to register. Required fields are marked * </p>
+      <div class="mb-3">
+        <mat-form-field class="FormInput">
           <input matInput type="text" name="firstName" [formControl]="signupForm.controls['firstName']"
             placeholder="First Name *" value="">
         </mat-form-field>
         <small *ngIf="signupForm.controls['firstName'].hasError('required') && signupForm.controls['firstName'].touched"
           class="form-error-msg"> First Name is required </small>
       </div>
-      <div class="mb-1">
-        <mat-form-field class=" ">
+      <div class="mb-3">
+        <mat-form-field class="FormInput">
           <input matInput type="text" name="lastName" [formControl]="signupForm.controls['lastName']"
             placeholder="Last Name *" value="">
         </mat-form-field>
         <small *ngIf="signupForm.controls['lastName'].hasError('required') && signupForm.controls['lastName'].touched"
           class="form-error-msg"> Last Name is required </small>
       </div>
-      <div class="mb-1">
-        <mat-form-field class=" ">
+      <div class="mb-3">
+        <mat-form-field class="FormInput">
           <input matInput type="email" name="email" [formControl]="signupForm.controls['email']" placeholder="Email *"
             value="">
         </mat-form-field>
@@ -33,18 +33,20 @@
         <small *ngIf="signupForm.controls['email'].hasError('email') && signupForm.controls['email'].touched"
           class="form-error-msg"> Invalid email address </small>
       </div>
-      <div class="mb-1">
-        <mat-form-field class=" ">
+      <div class="mb-3">
+        <mat-form-field class="FormInput">
           <input type="password" name="password" matInput [formControl]="signupForm.controls['password']"
             placeholder="Password *" value="">
         </mat-form-field>
         <small *ngIf="signupForm.controls['password'].hasError('required') && signupForm.controls['password'].touched"
           class="form-error-msg"> Password is required </small>
+        <small *ngIf="signupForm.controls['password'].hasError('pattern') && signupForm.controls['password'].touched"
+          class="form-error-msg"> Password must be atleast 8 digits </small>
       </div>
       <div class="mb-3">
-        <mat-form-field class=" ">
-          <input type="password" name="passwordConfirmation" matInput [formControl]="signupForm.controls['passwordConfirmation']"
-            placeholder="Confirm password *" value="">
+        <mat-form-field class="FormInput">
+          <input type="password" name="passwordConfirmation" matInput
+            [formControl]="signupForm.controls['passwordConfirmation']" placeholder="Confirm password *" value="">
         </mat-form-field>
         <small
           *ngIf="signupForm.controls['passwordConfirmation'].hasError('required') && signupForm.controls['passwordConfirmation'].touched"
@@ -53,7 +55,6 @@
           class="form-error-msg"> Passwords do not match </small>
       </div>
       <p *ngIf="errorMsg" class="text-start"><small class="text-danger">{{errorMsg}}</small></p>
-
       <button mat-raised-button class="octfBtn octfBtnLight w-100" [disabled]="signupForm.invalid">Sign up</button>
       <div class="text-center mt-3">
         <span>Already have an account ? </span><a href="/sessions/signin" class="BlueLink">Login</a>

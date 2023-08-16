@@ -25,10 +25,10 @@ export class Signup5Component {
     const password = new UntypedFormControl('', Validators.required);
 
     this.signupForm = new FormGroup({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', [Validators.required, Validators.pattern('^.{8,}$')]),
       passwordConfirmation: new FormControl('', Validators.required),
     }, { validators: this.MustMatch('password', 'passwordConfirmation') });
   }
@@ -74,12 +74,15 @@ export class Signup5Component {
       this.authService.setToken(res.userToken);
       this.isLoading = false;
       this.router.navigate(['/home']);
-    }, (error) => {
+    }, error => {
       console.log(error);
       this.isLoading = false;
       this.submitButton.disabled = false;
       // this.progressBar.mode = 'determinate';
       this.errorMsg = error.error.error.message;
+      setTimeout(() => {
+        this.errorMsg = null;
+      }, 4000);
     });
   }
 }
