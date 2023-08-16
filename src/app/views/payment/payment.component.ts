@@ -81,21 +81,4 @@ export class PaymentComponent implements OnInit {
     });
   }
 
-  // createPaymentToken() {
-  //   const name = this.stripeForm.get('name').value;
-  //   this.stripeService
-  //     .createToken(this.card.getCard(), { name: 'Customer Name' })
-  //     .subscribe(result => {
-  //       console.log(result);
-  //       if (result.token) {
-  //         // Send the token to your backend for processing
-  //         this.processPayment(result.token.id);
-  //       } else if (result.error) {
-  //         // Handle the error on the frontend
-  //         console.error(result.error.message);
-  //       }
-  //     }, error => {
-  //       console.log(error);
-  //     });
-  // }
 }

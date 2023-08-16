@@ -151,11 +151,12 @@ export class PricingCalculatorComponent implements OnInit {
       //Commit order selection
 
       //Redirect to checkout with received sessionId
-      this.stripeService.redirectToCheckout({ sessionId: checkoutRes.sessionID }).subscribe(stripeRes => {
-        console.log(stripeRes);
-      }), error => {
-        console.log(error);
-      };
+      window.open(checkoutRes.paymentUrl,'_self')
+      // this.stripeService.redirectToCheckout({ sessionId: checkoutRes.sessionID }).subscribe(stripeRes => {
+      //   console.log(stripeRes);
+      // }), error => {
+      //   console.log(error);
+      // };
     }, (error: any) => {
       console.log(error);
     });

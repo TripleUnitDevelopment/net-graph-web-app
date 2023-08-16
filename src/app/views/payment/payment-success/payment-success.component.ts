@@ -23,7 +23,8 @@ export class PaymentSuccessComponent {
       console.log("Token: ", this.token);
 
       const model = {
-        orderPaymentReference: this.token
+        orderReference: this.token,
+        paymentStatus:"Success"
       }
 
       this.paymentService.FinalizeOrderPayment(model).subscribe((res: any) => {
@@ -31,7 +32,7 @@ export class PaymentSuccessComponent {
         this.isLoading = false;
         this.paymentSuccess = true;
       }, error => {
-        this.router.navigate(['/CancelPayment']);
+        // this.router.navigate(['/CancelPayment']);
         this.isLoading = false;
         console.log(error);
 
