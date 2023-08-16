@@ -25,6 +25,10 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { PricingCalculatorComponent } from './views/pricing-calculator/pricing-calculator.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedMaterialModule } from './shared/shared-material.module';
+import { PaymentComponent } from './views/payment/payment.component';
+import { NgxStripeModule } from 'ngx-stripe';
+import { PaymentSuccessComponent } from './views/payment/payment-success/payment-success.component';
+import { PaymentFailedComponent } from './views/payment/payment-failed/payment-failed.component';
 
 
 // AoT requires an exported function for factories
@@ -44,6 +48,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     OAuthModule.forRoot(),
     LayoutModule,
     SharedMaterialModule,
+    NgxStripeModule.forRoot('pk_test_51NdY7WELgniAMxuJtKnD7qv47kucqohMMXlgA2b7K4bwyVHMiYNNnLJuGVi3bXRLxdTiWm8bQYR2j6JlGZGJHjhy00UqZeHtCL'),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -54,7 +59,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
     RouterModule.forRoot(rootRouterConfig, { useHash: false })
   ],
-  declarations: [AppComponent, PricingComponent, PricingCalculatorComponent],
+  declarations: [AppComponent, PricingComponent, PricingCalculatorComponent, PaymentComponent, PaymentSuccessComponent, PaymentFailedComponent],
   providers: [
     { provide: ErrorHandler, useClass: ErrorHandlerService },
     // { provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig },

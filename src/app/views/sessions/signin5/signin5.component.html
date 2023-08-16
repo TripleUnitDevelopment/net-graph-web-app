@@ -4,22 +4,26 @@
   <div class="flex-Div">
     <form class="MainForm FormSmWidth" [formGroup]="signinForm" (ngSubmit)="signin()">
       <h2>Login </h2>
-      <p class="font14 mb-3"> Login here using your username and password. Required fields are marked * </p>
-      <div class="mb-3">
+      <p class="font14"> Login here using your email and password. Required fields are marked * </p>
+      <div class="mb-3 d-flex flex-column">
         <mat-form-field class="full-width">
-          <input matInput name="username" [formControl]="signinForm.controls['username']" placeholder="Your User Name *"
+          <input matInput name="email" [formControl]="signinForm.controls['email']" placeholder="Your User Name *"
             value="" name="your-name">
         </mat-form-field>
-        <small *ngIf="signinForm.controls['username'].hasError('required') && signinForm.controls['username'].touched"
-          class="form-error-msg"> Username is required </small>
+        <small *ngIf="signinForm.controls['email'].hasError('required') && signinForm.controls['email'].touched"
+          class="form-error-msg"> Email is required </small>
+        <small *ngIf="signinForm.controls['email'].hasError('email') && signinForm.controls['email'].touched"
+          class="form-error-msg"> Email is invalid </small>
       </div>
-      <div class="mb-3">
+      <div class="mb-3 d-flex flex-column">
         <mat-form-field class="full-width">
           <input type="password" name="your-password" matInput [formControl]="signinForm.controls['password']"
             placeholder="Password" value="">
         </mat-form-field>
         <small *ngIf="signinForm.controls['password'].hasError('required') && signinForm.controls['password'].touched"
           class="form-error-msg"> Password is required </small>
+        <small *ngIf="signinForm.controls['password'].hasError('pattern') && signinForm.controls['password'].touched"
+          class="form-error-msg"> Password must be atleast 8 digits </small>
       </div>
       <div class="mb-3">
         <div class="row">
@@ -35,7 +39,7 @@
       <p *ngIf="errorMsg" class="text-start"><small class="text-danger">{{errorMsg}}</small></p>
       <button mat-raised-button class="octfBtn octfBtnLight w-100" [disabled]="signinForm.invalid">Login</button>
       <div class="text-center mt-3">
-        <span>Don't have an account ? </span><a href="/sessions/signup" class="BlueLink">Sign up</a>
+        <span>Don't have an account ? </span><a routerLink="/sessions/signup" class="BlueLink">Sign up</a>
       </div>
     </form>
   </div>

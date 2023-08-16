@@ -1,0 +1,24 @@
+<mat-progress-bar mode="indeterminate" class="session-progress" *ngIf="isLoading"></mat-progress-bar>
+
+<div class="PageContent">
+    <div class=" ">
+        <section class="">
+            <div class="GrayBg ">
+                <div class="container">
+                    <div class="FlexDiv">
+                        <div class="CardBody text-center" style="width: 60%" *ngIf="paymentSuccess">
+                            <div class="mb-4 mt-4">
+                                <img src="./assets/images/icons/check.png" alt="check" class="checkImg">
+                            </div>
+                            <h4 class="mb-2 Success">Payment completed </h4>
+                            <p class="ModalPara paragh2   ">That's it, you'll all done.</p>
+                            <button type="button" class="btn BlueBtn WidthBtn mb-4" routerLink="/home"> Home </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+</div>

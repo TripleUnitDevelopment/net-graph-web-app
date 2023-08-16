@@ -1414,5 +1414,13 @@ input:-webkit-autofill {
   text-decoration: underline;
 }
 
-
-
+.btn-check:focus+.btn, .btn:focus {
+outline: 0;
+box-shadow: unset;
+}
+.CardBody h4.Success {
+color: #5fb670; 
+}
+.CardBody h4.Failed {
+color: #F44336; 
+}

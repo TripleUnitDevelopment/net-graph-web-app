@@ -35,4 +35,14 @@ export class BaseService {
     };
     return this.http.post<any>(`${this.apiUrl}${url}?subscription-key=${config.subscriptionKey}`, data, this.httpOptions);
   }
+
+  protected put(url: string, data: any, params?: HttpParams, options: { reportProgress?: boolean } = {}): Observable<HttpEvent<any>> {
+    this.httpOptions = {
+      headers: this.httpHeaders,
+      params: params,
+      withCredentials: false,
+      ...options.reportProgress ? { reportProgress: true, observe: 'events' } : {},
+    };
+    return this.http.put<any>(`${this.apiUrl}${url}?subscription-key=${config.subscriptionKey}`, data, this.httpOptions);
+  }
 }

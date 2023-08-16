@@ -75,24 +75,18 @@
                                         <div class="row mt-3 align-items-end ">
                                             <div class="col-md ">
                                                 <div class="row">
-                                                    <div class="col-md-6" *ngIf="cost?.baseCostAmount > 0">
+                                                    <div class="col-md" *ngIf="cost?.baseCostAmount > 0">
                                                         <label>Base amount </label>
                                                         <h3 class="mb-0"> {{cost?.baseCostAmount}} {{selectedCurrency}}
                                                         </h3>
                                                     </div>
-                                                    <div class="col-md-6" *ngIf="cost?.offerDiscountAmount > 0">
+                                                    <div class="col-md" *ngIf="cost?.offerDiscountAmount > 0">
                                                         <label>Discount amount </label>
                                                         <h3 class="mb-0"> {{cost?.offerDiscountAmount}}
                                                             {{selectedCurrency}}
                                                         </h3>
                                                     </div>
-                                                    <div class="col-md-6" *ngIf="cost?.annualDiscountAmount > 0">
-                                                        <label>Annual Discount amount </label>
-                                                        <h3 class="mb-0"> {{cost?.annualDiscountAmount}}
-                                                            {{selectedCurrency}}
-                                                        </h3>
-                                                    </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md">
                                                         <label>Total Payment </label>
                                                         <h3 class="mb-0"> {{cost?.finalCostAmount}} {{selectedCurrency}}
                                                         </h3>
@@ -101,7 +95,8 @@
                                             </div>
                                             <div class="col-md-auto ">
                                                 <button class="btn LightBlueBtn BtnPadding2" type="submit"
-                                                    [disabled]="!packageForm.valid || isCalculating"> Select
+                                                    [disabled]="!packageForm.valid || isCalculating || isLoading"
+                                                    (click)="checkout()"> Checkout
                                                 </button>
                                             </div>
                                         </div>

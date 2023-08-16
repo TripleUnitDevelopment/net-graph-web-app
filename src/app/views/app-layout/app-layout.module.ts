@@ -12,6 +12,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule as MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedMaterialModule } from 'app/shared/shared-material.module';
+import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SharedMaterialModule } from 'app/shared/shared-material.module';
     MatIconModule,
     MatTooltipModule,
     SharedMaterialModule,
-    AppLayoutRoutingModule
+    AppLayoutRoutingModule,
+    NgxStripeModule.forRoot('pk_test_51NdY7WELgniAMxuJtKnD7qv47kucqohMMXlgA2b7K4bwyVHMiYNNnLJuGVi3bXRLxdTiWm8bQYR2j6JlGZGJHjhy00UqZeHtCL'),
   ]
 })
 export class AppLayoutModule { }

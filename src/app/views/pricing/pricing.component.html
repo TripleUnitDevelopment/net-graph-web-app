@@ -1,4 +1,5 @@
 <mat-progress-bar mode="indeterminate" class="session-progress" *ngIf="isLoading"></mat-progress-bar>
+
 <div class="PageContent">
     <div class="MrTop88">
         <section class="">
@@ -23,7 +24,7 @@
                         </div> -->
 
                         <!-- Currency selection -->
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <select class="form-control select2" [ngModel]="selectedCurrencyID"
                                 (change)="onCurrencyChange($event)">
                                 <option [value]="null">Select Currency</option>

@@ -37,8 +37,8 @@ export class Signin5Component {
 
   ngOnInit() {
     this.signinForm = new UntypedFormGroup({
-      username: new UntypedFormControl('', Validators.required),
-      password: new UntypedFormControl('', Validators.required),
+      email: new UntypedFormControl('', [Validators.required, Validators.email]),
+      password: new UntypedFormControl('', [Validators.required, Validators.pattern('^.{8,}$')]),
       rememberMe: new UntypedFormControl(false)
     });
 
@@ -65,7 +65,7 @@ export class Signin5Component {
     // this.progressBar.mode = 'indeterminate';
 
     const model = {
-      userEmail: this.signinForm.value.username,
+      userEmail: this.signinForm.value.email,
       password: this.signinForm.value.password
     };
 

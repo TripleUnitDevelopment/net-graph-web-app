@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PaymentService } from 'app/shared/services/http/payment.service';
 import { PackagesService } from 'app/shared/services/http/pricing.service';
+import { StripeService } from 'ngx-stripe';
 import { debounceTime } from 'rxjs/operators';
 
 @Component({
@@ -19,11 +21,12 @@ export class PricingCalculatorComponent implements OnInit {
   packageForm: UntypedFormGroup;
   previousUserCount;
   previousBillingPeriod;
-  
+
   isLoading: boolean = true;
-  
+
   @ViewChild(MatProgressBar) progressBar: MatProgressBar;
-  constructor(private route: ActivatedRoute, private router: Router, private packagesService: PackagesService) {
+  constructor(private route: ActivatedRoute, private router: Router, private packagesService: PackagesService,
+    private paymentService: PaymentService, private stripeService: StripeService) {
     this.packageForm = new UntypedFormGroup({
       userCount: new UntypedFormControl(1, [
         Validators.required,
@@ -80,13 +83,8 @@ export class PricingCalculatorComponent implements OnInit {
     this.packagesService.GetPackageByID(id).subscribe((res: any) => {
       this.isLoading = false;
       this.selectedPlan = res;
-      this.cost={
-        finalCostAmount:this.selectedPlan.cost,
-        baseCostAmount:this.selectedPlan.cost,
-      }
-      // this.calculateCost() 
       console.log("package: ", this.selectedPlan)
-      // this.calculateCost();
+      this.calculateCost();
     }, error => {
       console.log(error);
       this.isLoading = false;
@@ -139,5 +137,30 @@ export class PricingCalculatorComponent implements OnInit {
       }, 4000);
     });
   }
+
+  checkout() {
+    this.isLoading = true;
+    const model = {
+      packageGUID: this.selectedPlan.id,
+      calculatedCostGUID: this.cost.id
+    }
+
+    console.log(model);
+
+    this.paymentService.CreateCheckoutSession(model).subscribe((checkoutRes: any) => {
+      console.log("Checkout res: ", checkoutRes);
+      //Commit order selection
+
+      //Redirect to checkout with received sessionId
+      this.stripeService.redirectToCheckout({ sessionId: checkoutRes.sessionID }).subscribe(stripeRes => {
+        console.log(stripeRes);
+      }), error => {
+        console.log(error);
+      };
+    }, (error: any) => {
+      console.log(error);
+    });
+  }
+
 
 }
