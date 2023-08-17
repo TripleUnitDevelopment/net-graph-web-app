@@ -1424,3 +1424,32 @@ color: #5fb670;
 .CardBody h4.Failed {
 color: #F44336; 
 }
+.CardBody {
+  background-color: #fff;
+  padding: 20px 30px;
+  margin: 30px auto;
+  border: 1px solid #E9E9E9;
+  border-radius: 0px;
+}
+.FlexDiv {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+}
+.CardBody h4 {
+  color: #1A1A1A;
+  font-weight: bold;
+  font-size: 1.7rem;
+  text-transform: capitalize;
+}
+.ModalPara {
+  font-size: 1.1rem;
+  color: #5D6666;
+}
+.btn[_ngcontent-ng-c3844676127]:disabled , .btn:disabled {
+  background-color: #eeeeee !important;
+  border: 1px solid #eeeeee !important;
+  color: #6C6C6C !important;
+}
